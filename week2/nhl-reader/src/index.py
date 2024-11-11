@@ -1,21 +1,23 @@
 import requests
 from player import Player
 
+def if_player_fin(player_dict):
+    return player_dict['nationality'] == "FIN"
+
 def main():
     url = "https://studies.cs.helsinki.fi/nhlstats/2023-24/players"
     response = requests.get(url).json()
 
-    # print("JSON-muotoinen vastaus:")
-    # print(response)
-
+    fin_players = filter(if_player_fin, response)
     players = []
 
-    for player_dict in response:
-        if player_dict['nationality'] == "FIN":
-            player = Player(player_dict)
-            players.append(player)
+    for player_dict in fin_players:
+        player = Player(player_dict)
+        players.append(player)
 
-    print("Players from FIN")
+    players.sort(reverse=True)
+
+    print("Players from FIN\n")
 
     for player in players:
         print(player)
