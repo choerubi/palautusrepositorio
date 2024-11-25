@@ -1,3 +1,5 @@
+# testing tags
+
 from kauppa import Kauppa
 from kirjanpito import kirjanpito
 from varasto import varasto
