@@ -15,6 +15,10 @@ class QueryBuilder:
     def has_fewer_than(self, value, attr):
         self._matcher = And(self._matcher, HasFewerThan(value, attr))
         return self
+    
+    def one_of(self, *matchers):
+        self._matcher = And(self._matcher, Or(*matchers))
+        return self
 
     def build(self):
         return self._matcher
